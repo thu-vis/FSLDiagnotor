@@ -4,7 +4,7 @@ Codes for the interactive analysis system, FSLDiagnotor, described in our paper 
 
 ## Introduction
 
-FSLDiagnotor is a visual analysis tool for ensemble few-shot learning. It supports users to 1) find a subset of diverse and cooperative learners that well predict the sample collections and 2) remove low-quality shots and recommending necessary new shots to adequately represent the sample collection. A video demo is available at [here](https://repo.vicayang.cc/Diagnosing_Ensemble_Few_Shot_Classifiers/video.html).
+FSLDiagnotor is a visual analysis tool for ensemble few-shot learning. It supports users to 1) find a subset of diverse and cooperative learners that well predict the sample collections and 2) remove low-quality shots and recommend necessary new shots to adequately represent the sample collection. A video demo is available at [here](https://repo.vicayang.cc/Diagnosing_Ensemble_Few_Shot_Classifiers/video.html).
 
 ## Quick start
 
