@@ -34,7 +34,7 @@ python manage.py run
 
 ## Reproduce the teaser
 
-You should see the interface of FSLDiagnotor, which is quite similar to the teaser (despite some small modification such as annotations). The visual effect may change due to the difference resolution of your browser. The figure in our paper is render using a resolution of 1200x800. Take chrome as an example, you can enter the dev model using `Ctrl+Shift+I`, and then resize the browser. You should see the current resolution of your brower on the top-right corner during you adjustment.
+You should see the interface of FSLDiagnotor after running `python manage.py run`, which is quite similar to the teaser (despite some minor modifications such as annotations). The visual effect may change due to the different resolutions of your browser. The figure in our paper is rendered using a resolution of 1200x800. Take chrome as an example. You can enter the dev model using `Ctrl+Shift+I` and then resize the browser. You should see the current resolution of your browser in the top-right corner during your adjustment.
 
 ## Citation
 
