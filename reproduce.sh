@@ -1,6 +1,6 @@
 # download repo
-git clone https://github.com/VicaYang/FSLDiagnotor.git
-cd FSLDiagnotor
+# git clone https://github.com/VicaYang/FSLDiagnotor.git
+# cd FSLDiagnotor
 
 # config the enviroment
 # I strongly suggest you creating a new environment using venv or conda, here I use conda
