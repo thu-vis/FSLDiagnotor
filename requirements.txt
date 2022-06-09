@@ -1,4 +1,5 @@
 Flask
-flask_session
-flask_compress
+Flask_Session
+Flask_Compress
 numpy
+scikit-learn

@@ -10,7 +10,7 @@ FSLDiagnotor is a visual analysis tool for ensemble few-shot learning. It suppor
 
 Here is the scripts for setup. You can simply `bash reproduce.sh` if you are using conda, or make necessary modifications on in.
 
-```
+```{bash}
 # download repo
 git clone xxxxxx
 cd xxxxxx

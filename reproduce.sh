@@ -1,11 +1,12 @@
 # download repo
-git clone xxxxxx
-cd xxxxxx
+git clone https://github.com/VicaYang/FSLDiagnotor.git
+cd FSLDiagnotor
 
 # config the enviroment
 # I strongly suggest you creating a new environment using venv or conda, here I use conda
-conda create -n fsl python=3.8
-pip install -r requirements
+yes | conda create -n fsl python=3.8
+conda activate fsl
+pip install -r requirements.txt
 
 # download data
 pip install gdown
