@@ -31,6 +31,10 @@ rm data.tar.gz
 python manage.py run
 ```
 
+## Reproduce the teaser
+
+You should see the interface of FSLDiagnotor, which is quite similar to the teaser (despite some small modification such as annotations). The visual effect may change due to the difference resolution of your browser. The figure in our paper is render using a resolution of 1200x800. Take chrome as an example, you can enter the dev model using `Ctrl+Shift+I`, and then resize the browser. You should see the current resolution of your brower on the top-right corner during you adjustment.
+
 ## Citation
 
 After it is early-accessed, I will release the bib file.
