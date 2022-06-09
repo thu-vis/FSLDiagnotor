@@ -8,7 +8,7 @@ FSLDiagnotor is a visual analysis tool for ensemble few-shot learning. It suppor
 
 ## Quick start
 
-Here is the scripts for setup. You can simply `bash reproduce.sh` if you are using conda, or make necessary modifications on in.
+Here is the scripts for setup. You can simply `bash reproduce.sh` if you are using conda, or make necessary modifications on it.
 
 ```{bash}
 # download repo
@@ -17,6 +17,7 @@ Here is the scripts for setup. You can simply `bash reproduce.sh` if you are usi
 
 # config the enviroment
 # I strongly suggest you creating a new environment using venv or conda, here I use conda
+# You can install miniconda, which is quite lighter than anaconda.
 yes | conda create -n fsl python=3.8
 conda activate fsl
 pip install -r requirements.txt
