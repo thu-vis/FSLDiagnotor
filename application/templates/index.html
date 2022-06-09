@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>FewShot Learning</title>
+  <link rel="icon" type="image/x-ico" href="../static/favicon.ico">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/materialize.min.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/font-awesome.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/bootstrap-select.min.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/nouislider.min.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/libs/introjs.min.css">
+  <link type="text/css" rel="stylesheet" href="../static/css/layout.css">
+  <meta charset="UTF-8">
+</head>
+
+
+<script src="../static/js/libs/seedrandom.min.js"></script>
+<script src="../static/js/libs/jquery.min.js"></script>
+<script src="../static/js/libs/materialize.min.js"></script>
+<script src="../static/js/libs/popper.min.js"></script>
+<script src="../static/js/libs/d3.min.js"></script>
+<script src="../static/js/libs/d3-lasso.min.js"></script>
+<script src="../static/js/libs/d3-contour.min.js"></script>
+<script src="../static/js/libs/bootstrap.min.js"></script>
+<script src="../static/js/libs/bootstrap-select.min.js"></script>
+<script src="../static/js/libs/request_dag.js"></script>
+<script src="../static/js/libs/turf.min.js"></script>
+<script src="../static/js/libs/nouislider.min.js"></script>
+<script src="../static/js/libs/skmeans.min.js"></script>
+<script src="../static/js/libs/intro.min.js"></script>
+
+<script src="../static/js/util.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/global.js"></script>
+<script src="../static/js/dataLoader.js"></script>
+<script src="../static/js/scatterplot.js"></script>
+<script src="../static/js/model.js"></script>
+<script src="../static/js/matrix.js"></script>
+<script src="../static/js/label_cluster.js"></script>
+<script src="../static/js/learner_cluster.js"></script>
+<script src="../static/js/highlight.js"></script>
+
+<body>
+  <div id="loading">
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <!--<div class="fsv-navbar">
+    <span class="my-vis-heading">FSLDiagnotor</span>
+    <div id="navbar-placeho"></div>
+    <div style="flex: 1 1 40vw; display: flex;">
+      <div style="flex: 0 0 120px; height:40px;" id="select-dataset-div">
+        <select class="selectpicker" id="select-dataset" data-width="120px" data-size="5"></select>
+      </div>
+      <button type="button" class="btn btn-1" id="add-data">Add data</button>
+
+    </div>
+  </div>-->
+  <div class="main-container">
+    <div class="self-column" id="plot-column" style="flex: 0 0 64.5%; display: flex; flex-direction: column;" >
+      <div class="self-row component" id="matrix-row" style="flex: 1 0 100%;">
+        <div class="view-header">
+        <div class="my-panel-heading">
+          <span>Learner</span>
+        </div>
+
+        <div class="my-panel-heading-buttons">
+          <!-- <div style="width: 150px; height: 24px; display: inline-block" id="select-dataset-div">
+            <select class="selectpicker" id="select-dataset" data-width="120px" data-size="5"></select>
+          </div> -->
+          <button type="button" class="btn btn-1" id="recommend-learner">Recommend Learner</button>
+          <button type="button" class="btn btn-1" id="update-model">Update Model</button>
+          <!--
+          <svg id="row-mode-svg" width=30 height=30 style="margin-right: 5px; float:left">
+            <rect id="row-mode" width=15 height=15 rx=1 ry=1 x=10 y=9 fill="#f6f6f6" stroke="#9ca0be" stroke-width=1></rect>
+            <path id="cluster-check" class="check-glyph" fill="white" fill-opacity=0 transform="translate(11.5, 10) scale(.0086,.0111)" d="M1358.606082 123.989724l-113.738475-117.719322a19.904233 19.904233 0 0 0-29.003311 0L511.823137 739.314872 148.997402 363.977905a20.472925 20.472925 0 0 0-29.003311 0l-113.738475 118.288014a21.041618 21.041618 0 0 0 0 29.572004l487.938057 506.136213A19.335541 19.335541 0 0 0 511.823137 1023.661059a21.61031 21.61031 0 0 0 15.354694-5.686923L1358.606082 154.130419a21.041618 21.041618 0 0 0 0-30.140695z"></path>
+          </svg>
+          <span style="font-size: 15px;  font-weight: 400; margin-top: 6px;margin-right: 20px; float:left">Learner Cluster</span>-->
+          
+        </div>
+        <!--<div class="my-panel-heading-buttons" style="margin-right: 220px">
+        </div>-->
+        </div>
+        <div id="matrix" style="margin: 10px;">
+          <svg></svg>
+        </div>
+      </div>
+    </div>
+    <div class="self-column" id="horizontal-sperator" style="flex: 0 0 5px; display: flex; flex-direction: column; background-color:#DBDBEF">
+    </div>
+    <div class="self-column" id="config-and-detail-column" style="flex: 0 0 35%;display: flex;flex-direction: column;">
+      <div class="self-row component" style="display:flex; flex:1 1 65%;">
+        <div class="view-header">
+          <div class="my-panel-heading">
+            <span >Sample</span>
+            <!--<svg id="uncertain-mode-svg" width=30 height=30 style="float:right;margin-right: 30px;">
+              <rect id="uncertain-mode" width=15 height=15 rx=1 ry=1 x=10 y=9 fill="#f6f6f6" stroke="#9ca0be" stroke-width=1></rect>
+              <path id="uncertain-check" class="check-glyph" fill="white" fill-opacity=0 transform="translate(11.5, 10) scale(.0086,.0111)" d="M1358.606082 123.989724l-113.738475-117.719322a19.904233 19.904233 0 0 0-29.003311 0L511.823137 739.314872 148.997402 363.977905a20.472925 20.472925 0 0 0-29.003311 0l-113.738475 118.288014a21.041618 21.041618 0 0 0 0 29.572004l487.938057 506.136213A19.335541 19.335541 0 0 0 511.823137 1023.661059a21.61031 21.61031 0 0 0 15.354694-5.686923L1358.606082 154.130419a21.041618 21.041618 0 0 0 0-30.140695z"></path>
+            </svg>
+            <span style="font-size: 15px; float:right; font-weight: 400; margin-top: 6px;">Uncertain Sample</span>-->
+          </div>
+          <div class="my-panel-heading-buttons">
+            <button type="button" class="btn btn-1" id="recommend-shot" style="float:right; margin-right: 22px;">Recommend Shot</button>
+            <svg id="button-zoom" class="icon mode-select" viewBox="0 0 1024 1024" width="20" height="20" onclick="Scatterplot.zoom_in()" style="fill: grey;cursor: pointer"><g><path d="M1027.961469 949.382334l-73.686239 74.031212-276.737364-277.565299a412.173775 412.173775 0 0 1-257.142895 90.106955 417.969322 417.969322 0 1 1 330.104691-164.86261zM420.394971 95.574088a323.170733 323.170733 0 1 0 321.92883 323.136236 322.894755 322.894755 0 0 0-321.92883-323.136236z m46.674851 510.905055h-93.487691v-140.852487H233.385092v-93.867161h140.197039v-140.748996h93.487691v140.748996h140.30053v93.867161H467.069822v140.852487z"></path></g></svg>
+            <svg id="button-zoom-return" class="icon" viewBox="0 0 1024 1024" width="20" height="20" onclick="Scatterplot.zoom_back()" style="fill: grey; margin-right:10px; cursor: pointer"><g><path d="M1027.961469 949.382334l-73.686239 74.031212-276.737364-277.565299a412.173775 412.173775 0 0 1-257.142895 90.106955 417.969322 417.969322 0 1 1 330.104691-164.86261zM420.394971 95.574088a323.170733 323.170733 0 1 0 321.92883 323.136236 322.894755 322.894755 0 0 0-321.92883-323.136236z m46.674851 370.062468h-93.487691H233.385092v-93.867161h140.197039h93.487691h140.30053v93.867161H467.069822z"></path></g></svg>
+          </div>
+          <div id="sample-controls" style="opacity: 0; position: relative">
+          <div id="learner-filter" style="width: 20%; position: absolute; top: 18px; left: 70%;"></div>
+          <div class="legend-text" style="width: 20%; position: absolute; top: 11px; left: 55%; font-size: .6vw; text-align:left; "># Learners</div>
+          <div id="margin-filter"  style="width: 20%; position: absolute; top: 18px; left: 25%;"></div>
+          <div class="legend-text" style="width: 20%; position: absolute; top: 11px; left: 5%; font-size: .6vw; text-align:left;">Confidence</div>
+          </div>
+          <div class="flex-line pl-4">
+          </div>
+        </div>
+        <div id="scatterplot" style="margin: 10px; margin-top:40px; margin-bottom: 0px">
+          <svg id="progress" style="display: none"></svg>
+          <svg id="plot">
+            <g id="plot-background"></g>
+            <g id="plot-scatter">
+              <g class="normal"></g>
+              <g class="selected"></g>
+            </g>
+            <g id="label-background"></g>
+          </svg>
+        </div>
+      </div>
+      <div class="self-row component" id="horizontal-sperator" style="height:5px; background-color:#DBDBEF"></div>
+    
+      <div class="self-row component" id="model-row" style="flex: 1 0 35%; margin: 0px 20px 15px 0px;">
+        <div id="shot-cards-div" style="overflow-x: hidden; overflow-y: hidden;">
+          <svg id="shot-cards" xmlns="http://www.w3.org/2000/svg">
+            <g id="card-view"></g>
+            <g id="card-slider"></g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </body>
+  <svg width=0 height=0 id="defsvg">
+    <defs>
+      <pattern id="unselected_bar" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="16" height="16" style="fill:#efefef" />
+        <line x1="16" y1="0" x2="0" y2="16" style="stroke:#ffffff;stroke-width:4" />
+      </pattern>
+      <pattern id="pattern0" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1" style="stroke: none; fill: #444444" />
+      </pattern>
+      <pattern id="pattern1" x="2" y="2" width="4" height="4" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="2" x2="4" y2="2" style="stroke:#444444;stroke-width:1" />
+      </pattern>
+      <pattern id="pattern3" x="2" y="2" width="4" height="4" patternUnits="userSpaceOnUse">
+        <line x1="2" y1="0" x2="2" y2="4" style="stroke:#444444;stroke-width:1" />
+      </pattern>
+      <pattern id="pattern2" x="2" y="2" width="4" height="4" patternUnits="userSpaceOnUse">
+        <line x1="4" y1="0" x2="0" y2="4" style="stroke:#444444;stroke-width:1" />
+      </pattern>
+      <pattern id="pattern4" x="2" y="2" width="4" height="4" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="4" y2="4" style="stroke:#444444;stroke-width:1" />
+      </pattern>
+      <pattern id="pattern5" x="2" y="2" width="8" height="8" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="2" style="stroke: none; fill: #444444" />
+        <circle cx="6" cy="6" r="2" style="stroke: none; fill: #444444" />
+      </pattern>
+      <pattern id="pattern6" x="0.5" y="0.5" width="6" height="6" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="3" x2="6" y2="3" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+      <pattern id="pattern7" x="1.5" y="1.5" width="6" height="6" patternUnits="userSpaceOnUse">
+        <line x1="3" y1="0" x2="3" y2="6" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+      <pattern id="pattern8" x="2" y="2" width="8" height="8" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="8" x2="8" y2="0" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+      <pattern id="pattern9" x="2" y="2" width="8" height="8" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="8" y2="8" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+       <pattern id="pattern10" x="2" y="2" width="8" height="8" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="8" y2="8" style="stroke:#444444;stroke-width:2" />
+        <line x1="0" y1="8" x2="8" y2="0" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+      <pattern id="pattern11" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+        <line x1="3" y1="0" x2="3" y2="6" style="stroke:#444444;stroke-width:2" />
+        <line x1="0" y1="3" x2="6" y2="3" style="stroke:#444444;stroke-width:2" />
+      </pattern>
+      <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="red"/>
+        <stop offset="50%" stop-color="black" stop-opacity="0"/>
+        <stop offset="100%" stop-color="blue"/>
+      </linearGradient>
+    </defs>
+    <!--
+      <rect width='25' height='25' fill='url(#pattern0)' x='0'></rect>
+      <rect width='25' height='25' fill='url(#pattern1)' x='25'></rect>
+      <rect width='25' height='25' fill='url(#pattern2)' x='50'></rect>
+      <rect width='25' height='25' fill='url(#pattern3)' x='75'></rect>
+      <rect width='25' height='25' fill='url(#pattern4)' x='100'></rect>
+      <rect width='25' height='25' fill='url(#pattern5)' x='125'></rect>
+      <rect width='25' height='25' fill='url(#pattern6)' x='150'></rect>
+      <rect width='25' height='25' fill='url(#pattern7)' x='175'></rect>
+      <rect width='25' height='25' fill='url(#pattern8)' x='200'></rect>
+      <rect width='25' height='25' fill='url(#pattern9)' x='225'></rect>
+      -->
+  </svg>
+</html>

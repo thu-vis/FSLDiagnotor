@@ -1,0 +1,4 @@
+Flask
+flask_session
+flask_compress
+numpy
