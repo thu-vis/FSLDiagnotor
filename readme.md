@@ -38,7 +38,20 @@ You should see the interface of FSLDiagnotor after running `python manage.py run
 
 ## Citation
 
-After it is early-accessed, I will release the bib file.
+```
+@article{yang2022diagnosing,
+    year = {2022},
+    volume={28},
+    number={9},
+    pages = {3292--3306},
+    author = {Weikai Yang and Xi Ye and Xingxing Zhang and Lanxi Xiao and Jiazhi Xia and Zhongyuan Wang and Jun Zhu and Hanspeter Pfister and Shixia Liu},
+    title = {Diagnosing Ensemble Few-Shot Classifiers},
+    journal = {{IEEE} Transactions on Visualization and Computer Graphics},
+    publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+    doi={10.1109/TVCG.2022.3182488},
+    url={https://doi.org/10.1109/TVCG.2022.3182488},
+  }
+```
 
 ## Contact
 
